@@ -260,6 +260,11 @@ img {
   white-space: pre-wrap;
 }
 
+/* Post page */
+.post__heading {
+  font-size: 30px;
+}
+
 /* Footer */
 .footer {
   margin: 4rem;
