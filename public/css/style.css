@@ -325,51 +325,15 @@ img {
   border: 0;
 }
 
-#searchClose {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: var(--gray-light);
-  padding: 15px;
-}
-
-.pagination {
-  font-size: 1.3rem;
-  color: var(--gray);
-  text-decoration: none;
-  margin-top: 40px;
-  display: inline-block;
-}
-
-.pagination:hover {
-  color: var(--black);
-}
-
-/* SearchBar */
-.searchBar {
-  visibility: hidden;
-  transform: translateY(-100px);
-  background-color: var(--black);
-  padding: 4px 0;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.searchBar.open {
-  transform: translateY(0);
-  transition: transform 0.1s;
-}
-
-.searchBar input {
-  margin: 0;
-  padding: 0;
+.searchBtn {
+  cursor: pointer;
 }
 
 #searchClose {
   position: absolute;
   top: 0;
   right: 0;
-  color: var(--gray-light);
+  color: black;
   padding: 15px;
+  cursor: pointer;
 }
