@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       searchInput.focus();
     });
   }
-  searchClose.addEventListener("click", function () {
+  searchClose.addEventListener("click", function() {
     searchBar.style.visibility = "hidden";
     searchBar.classList.remove("open");
     this.setAttribute("aria-expanded", "true");
