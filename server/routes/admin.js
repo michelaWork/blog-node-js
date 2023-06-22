@@ -61,9 +61,97 @@ router.post("/admin", async (req, res) => {
   }
 });
 
-//get dashboard
+//get admin dashboard
 router.get("/dashboard", authMiddleware, async (req, res) => {
-  res.render("admin/dashboard");
+  try {
+    const locals = {
+      title: "Admin",
+      description: "Personal Blog created with NodeJs, Express and MongoDB",
+    };
+    const data = await Post.find();
+    res.render("admin/dashboard", { data, locals, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//get admin create new post
+router.get("/add-post", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Add Post",
+      description: "Personal Blog created with NodeJs, Express and MongoDB",
+    };
+    res.render("admin/add-post", { locals, layout: adminLayout });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//post create new post
+router.post("/add-post", authMiddleware, async (req, res) => {
+  try {
+    try {
+      const newPost = new Post({
+        title: req.body.title,
+        body: req.body.body,
+      });
+      await Post.create(newPost);
+      res.redirect("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//get admin edit post
+router.get("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Edit Post",
+      description: "Personal Blog created with NodeJs, Express and MongoDB",
+    };
+    const data = await Post.findOne({ _id: req.params.id });
+    res.render("admin/edit-post", {
+      data,
+      locals,
+      layout: adminLayout,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//put admin edit post
+router.put("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      body: req.body.body,
+      updateAt: Date.now(),
+    });
+    res.redirect(`/edit-post/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//delete admin delite post
+router.delete("/delete-post/:id", authMiddleware, async (req, res) => {
+  try {
+    await Post.deleteOne({ _id: req.params.id });
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//get admin logout
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
 });
 
 //post admin register
