@@ -12,16 +12,14 @@ router.get("", async (req, res) => {
 
   try {
     const data = await Post.find();
-    res.render("index", { locals, data, currentRoute: "/" });
+    res.render("index", { locals, data });
   } catch (error) {
     console.log(error);
   }
 });
 
 router.get("/about", (req, res) => {
-  res.render("about", {
-    currentRoute: "/about",
-  });
+  res.render("about");
 });
 
 //get :id for single post page
@@ -34,7 +32,7 @@ router.get("/post/:id", async (req, res) => {
       description: "Personal Blog created with NodeJs, Express and MongoDB",
     };
 
-    res.render("post", { locals, data, currentRoute: `/post/${slug}` });
+    res.render("post", { locals, data });
   } catch (error) {
     console.log(error);
   }
